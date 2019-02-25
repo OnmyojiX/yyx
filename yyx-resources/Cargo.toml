@@ -1,0 +1,8 @@
+[package]
+name = "yyx-resources"
+version = "0.1.0"
+authors = ["Flux Xu <fluxxu@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+rust-embed = "4.3.0"

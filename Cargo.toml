@@ -1,0 +1,8 @@
+[workspace]
+members = [
+  "bin/yyx",
+  "yyx-types",
+  "yyx-resources",
+  "yyx-data",
+  "yyx-utils"
+]
