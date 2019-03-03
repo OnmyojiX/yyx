@@ -1,7 +1,7 @@
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
-    }
-}
+#![warn(clippy::all)]
+
+use rust_embed::RustEmbed;
+
+#[derive(RustEmbed)]
+#[folder = "yyx-resources/assets"]
+pub struct YyxAsset;

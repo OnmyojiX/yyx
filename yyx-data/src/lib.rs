@@ -1,5 +1,7 @@
 //! Local YYX data
 
+#![warn(clippy::all)]
+
 #[macro_use]
 extern crate log;
 #[macro_use]
@@ -22,7 +24,7 @@ pub fn init() -> DataResult<()> {
   Ok(())
 }
 
-const LAST_SNAPSHOT_FILE_NAME: &str = "last_snapshot.bin";
+const LAST_SNAPSHOT_FILE_NAME: &str = "last_snapshot.json";
 
 pub fn save_last_snapshot(snapshot: &Snapshot) -> DataResult<()> {
   use std::io::BufWriter;

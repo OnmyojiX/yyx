@@ -12,7 +12,7 @@ use crate::result::*;
 pub struct SelectedSnapshot(RwLock<Option<Arc<Snapshot>>>);
 
 impl SelectedSnapshot {
-  pub fn new() -> Self {
+  pub fn load() -> Self {
     let last_snapshot = match load_last_snapshot() {
       Ok(v) => v,
       Err(err) => {
@@ -30,6 +30,12 @@ impl SelectedSnapshot {
 }
 
 pub struct SnapshotRef(Arc<Snapshot>);
+
+impl SnapshotRef {
+  pub fn into_inner(self) -> Arc<Snapshot> {
+    self.0
+  }
+}
 
 impl Deref for SnapshotRef {
   type Target = Snapshot;
@@ -49,13 +55,10 @@ impl<'a, 'r> FromRequest<'a, 'r> for SnapshotRef {
       .map_failure(|_| unreachable!())
       .and_then(|selected| match *selected.0.read().unwrap() {
         Some(ref v) => Outcome::Success(SnapshotRef(v.clone())),
-        None => {
-          error!("Snapshot not selected: uri = {}", request.uri());
-          Outcome::Failure((
-            Status::BadRequest,
-            YyxError::bad_request("Snapshot not selected."),
-          ))
-        }
+        None => Outcome::Failure((
+          Status::BadRequest,
+          YyxError::bad_request("Snapshot not selected."),
+        )),
       })
   }
 }

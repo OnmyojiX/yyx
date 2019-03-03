@@ -11,10 +11,12 @@ pub struct Hero {
   pub equips: Vec<String>,
   /// 等级
   pub level: i64,
+  /// 星级
+  pub star: i64,
+  /// 觉醒
+  pub awake: i64,
   /// 经验值
   pub exp: f64,
-  /// 经验比率
-  pub exp_rate: f64,
   /// 昵称
   pub nick_name: String,
   /// 创建时间戳
@@ -25,6 +27,8 @@ pub struct Hero {
   pub rarity: HeroRarity,
   /// 技能列表
   pub skills: Vec<HeroSkill>,
+  /// 属性列表
+  pub attrs: HeroAttrs,
 }
 
 /// 技能
@@ -44,4 +48,25 @@ pub enum HeroRarity {
   SR,
   SSR,
   SP,
+}
+
+/// 式神属性
+#[derive(Debug, Serialize, Deserialize)]
+pub struct HeroAttrs {
+  pub max_hp: HeroAttr,
+  pub speed: HeroAttr,
+  pub crit_power: HeroAttr,
+  pub crit_rate: HeroAttr,
+  pub defense: HeroAttr,
+  pub attack: HeroAttr,
+  pub effect_hit_rate: f64,
+  pub effect_resist_rate: f64,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct HeroAttr {
+  pub base: f64,
+  pub add_value: f64,
+  pub add_rate: f64,
+  pub value: f64,
 }
