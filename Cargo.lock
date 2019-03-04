@@ -1568,6 +1568,14 @@ version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
+name = "winres"
+version = "0.1.8"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+dependencies = [
+ "toml 0.4.10 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
 name = "ws2_32-sys"
 version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1599,6 +1607,8 @@ dependencies = [
  "serde 1.0.88 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde_derive 1.0.88 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde_json 1.0.38 (registry+https://github.com/rust-lang/crates.io-index)",
+ "winapi 0.3.6 (registry+https://github.com/rust-lang/crates.io-index)",
+ "winres 0.1.8 (registry+https://github.com/rust-lang/crates.io-index)",
  "yyx-data 0.1.0",
  "yyx-resources 0.1.0",
  "yyx-types 0.1.0",
@@ -1815,6 +1825,7 @@ version = "0.1.0"
 "checksum winapi-i686-pc-windows-gnu 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)" = "ac3b87c63620426dd9b991e5ce0329eff545bccbbb34f3be09ff6fb6ab51b7b6"
 "checksum winapi-util 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)" = "7168bab6e1daee33b4557efd0e95d5ca70a03706d39fa5f3fe7a236f584b03c9"
 "checksum winapi-x86_64-pc-windows-gnu 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)" = "712e227841d057c1ee1cd2fb22fa7e5a5461ae8e48fa2ca79ec42cfc1931183f"
+"checksum winres 0.1.8 (registry+https://github.com/rust-lang/crates.io-index)" = "aea48d0b4b15ba195fc7250fdfb27736ce3bc327535db1c87a2fcb62371f9ecd"
 "checksum ws2_32-sys 0.2.1 (registry+https://github.com/rust-lang/crates.io-index)" = "d59cefebd0c892fa2dd6de581e937301d8552cb44489cdff035c6187cb63fa5e"
 "checksum yansi 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)" = "d60c3b48c9cdec42fb06b3b84b5b087405e1fa1c644a1af3930e4dfafe93de48"
 "checksum yansi 0.5.0 (registry+https://github.com/rust-lang/crates.io-index)" = "9fc79f4a1e39857fc00c3f662cbf2651c771f00e9c15fe2abc341806bd46bd71"
