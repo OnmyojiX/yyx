@@ -19,11 +19,6 @@ mod routes;
 const HOST: &str = "127.0.0.1";
 const PORT: u16 = 1128;
 
-#[get("/")]
-fn index() -> &'static str {
-  "Hello, world!"
-}
-
 #[get("/ping")]
 fn ping() -> &'static str {
   "OK"
@@ -45,7 +40,7 @@ fn main() {
     .unwrap();
   rocket::custom(config)
     .manage(helpers::SelectedSnapshot::load())
-    .mount("/", routes![routes::app::static_file, index])
+    .mount("/", routes![routes::app::static_file, routes::app::index])
     .mount(
       "/api",
       routes![
