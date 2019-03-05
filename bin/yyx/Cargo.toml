@@ -5,6 +5,12 @@ authors = ["Flux Xu <fluxxu@gmail.com>"]
 edition = "2018"
 description = "yyx"
 
+[package.metadata.bundle]
+name = "痒痒熊"
+identifier = "com.f.yyx"
+icon = ["512x512.png"]
+version = "0.1.1"
+description = "痒痒鼠的小伙伴。"
 
 [dependencies]
 yyx-data = { path = "../../yyx-data" }
@@ -20,9 +26,8 @@ serde_derive = "1.0"
 serde_json = "1.0"
 reqwest = "0.9"
 
-[package.metadata.bundle]
-name = "痒痒熊"
-identifier = "com.f.yyx"
-icon = ["512x512.png"]
-version = "0.1.1"
-description = "痒痒鼠的小伙伴。"
+[target.'cfg(windows)'.dependencies]
+winapi = { version = "0.3", features = ["shellapi"] }
+
+[build-dependencies]
+winres = "0.1.8"

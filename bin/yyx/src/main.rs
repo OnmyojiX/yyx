@@ -75,11 +75,20 @@ fn ping_and_launch_browser() {
 
 #[cfg(target_os = "windows")]
 fn launch_browser() {
-  use std::process::Command;
-  Command::new("start")
-    .args(&[&format!("http://{}:{}", HOST, PORT)])
-    .spawn()
-    .unwrap();
+  use std::ffi::CString;
+  use std::ptr;
+  use winapi::um::shellapi::ShellExecuteA;
+  let cstr = CString::new(format!("http://{}:{}", HOST, PORT)).unwrap();
+  unsafe {
+    ShellExecuteA(
+      ptr::null_mut(),
+      ptr::null_mut(),
+      cstr.as_ptr(),
+      ptr::null_mut(),
+      ptr::null_mut(),
+      1,
+    );
+  }
 }
 
 #[cfg(target_os = "macos")]
