@@ -2,18 +2,18 @@ branches:
   only:
     - ci
 language: rust
-rust:
-  - nightly
 cache: cargo
 matrix:
   include:
     - name: "Windows 32bit"
-      before_script: rustup target add i686-pc-windows-msvc
-      script: cargo build --all --release --target=i686-pc-windows-msvc
+      rust: nightly-i686-pc-windows-msvc
+      script: cargo build --all --release
       os: windows
     - name: "Windows 64bit"
+      rust: nightly
       script: cargo build --all --release
       os: windows
     - name: "macOS"
+      rust: nightly
       script: cargo build --all --release
       os: osx
