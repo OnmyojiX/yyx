@@ -1,6 +1,3 @@
-branches:
-  only:
-    - ci
 language: rust
 cache: cargo
 matrix:
