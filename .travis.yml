@@ -1,0 +1,8 @@
+language: rust
+rust:
+  - nightly
+cache: cargo
+matrix:
+  include:
+    - os: windows
+    - os: osx
