@@ -3,20 +3,33 @@
 
 #![warn(clippy::all)]
 
+#[macro_use]
+extern crate failure_derive;
+#[macro_use]
+extern crate yyx_utils;
+
 use chrono::{DateTime, Local};
 use serde_derive::{Deserialize, Serialize};
+
+pub mod result;
+
+mod migration;
 
 mod hero;
 mod hero_book_shard;
 mod hero_equip;
 mod hero_equip_preset;
 mod player;
+mod realm_card;
 
 pub use self::hero::*;
 pub use self::hero_book_shard::*;
 pub use self::hero_equip::*;
 pub use self::hero_equip_preset::*;
 pub use self::player::*;
+pub use self::realm_card::*;
+
+pub const VERSION: &str = "0.1.1";
 
 /// 痒痒熊生成的快照
 #[derive(Debug, Serialize, Deserialize)]
@@ -40,4 +53,7 @@ pub struct SnapshotData {
   pub hero_equip_presets: Vec<HeroEquipPreset>,
   /// 所有的式神召唤书碎片
   pub hero_book_shards: Vec<HeroBookShard>,
+  /// 所有的结节卡
+  #[serde(default)]
+  pub realm_cards: Vec<RealmCard>,
 }

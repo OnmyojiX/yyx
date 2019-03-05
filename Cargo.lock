@@ -1601,7 +1601,7 @@ dependencies = [
  "serde_json 1.0.38 (registry+https://github.com/rust-lang/crates.io-index)",
  "yyx-data 0.1.0",
  "yyx-resources 0.1.0",
- "yyx-types 0.1.0",
+ "yyx-types 0.1.1",
 ]
 
 [[package]]
@@ -1612,7 +1612,7 @@ dependencies = [
  "failure_derive 0.1.5 (registry+https://github.com/rust-lang/crates.io-index)",
  "log 0.4.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde_json 1.0.38 (registry+https://github.com/rust-lang/crates.io-index)",
- "yyx-types 0.1.0",
+ "yyx-types 0.1.1",
  "yyx-utils 0.1.0",
 ]
 
@@ -1625,11 +1625,15 @@ dependencies = [
 
 [[package]]
 name = "yyx-types"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "chrono 0.4.6 (registry+https://github.com/rust-lang/crates.io-index)",
+ "failure 0.1.5 (registry+https://github.com/rust-lang/crates.io-index)",
+ "failure_derive 0.1.5 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde 1.0.88 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde_derive 1.0.88 (registry+https://github.com/rust-lang/crates.io-index)",
+ "serde_json 1.0.38 (registry+https://github.com/rust-lang/crates.io-index)",
+ "yyx-utils 0.1.0",
 ]
 
 [[package]]

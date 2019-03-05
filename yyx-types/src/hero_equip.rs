@@ -55,6 +55,9 @@ pub struct HeroEquip {
   pub random_attrs: Vec<HeroEquipAttr>,
   /// 随机属性强化比率
   pub random_attr_rates: Vec<HeroEquipAttr>,
+  /// 单个御魂的属性（首领御魂）
+  #[serde(default)]
+  pub single_attrs: Vec<HeroEquipAttr>,
 }
 
 /// 御魂属性
