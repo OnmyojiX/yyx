@@ -3,3 +3,4 @@ data
 *.log
 .DS_Store
 dist
+.vscode
