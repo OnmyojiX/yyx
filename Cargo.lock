@@ -1606,6 +1606,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 name = "yyx"
 version = "0.2.0"
 dependencies = [
+ "cc 1.0.29 (registry+https://github.com/rust-lang/crates.io-index)",
  "chrono 0.4.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "fern 0.5.7 (registry+https://github.com/rust-lang/crates.io-index)",
  "log 0.4.6 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -1615,6 +1616,7 @@ dependencies = [
  "serde 1.0.88 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde_derive 1.0.88 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde_json 1.0.38 (registry+https://github.com/rust-lang/crates.io-index)",
+ "winapi 0.3.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "winres 0.1.8 (registry+https://github.com/rust-lang/crates.io-index)",
  "yyx-config 0.1.0",
  "yyx-data 0.1.0",

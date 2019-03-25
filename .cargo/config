@@ -9,3 +9,6 @@ rustflags = [
   "-Ctarget-feature=+crt-static", 
   "-Zunstable-options"
 ]
+
+[target.x86_64-unknown-linux-musl]
+linker = "x86_64-linux-musl-gcc"
