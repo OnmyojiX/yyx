@@ -19,10 +19,9 @@ pub fn index<'a>() -> Response<'a> {
   }
 }
 
-#[cfg(target_os = "macos")]
+#[cfg(not(target_os = "windows"))]
 fn translate_path(path: &Path) -> String {
-  let path = path.to_string_lossy();
-  path
+  path.to_string_lossy().to_string()
 }
 
 #[cfg(target_os = "windows")]

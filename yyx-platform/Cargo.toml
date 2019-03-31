@@ -1,0 +1,13 @@
+[package]
+name = "yyx-platform"
+version = "0.1.0"
+authors = ["Flux Xu <fluxxu@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+
+[target.'cfg(windows)'.dependencies]
+winapi = { version = "0.3", features = ["shellapi"] }
+
+[target.'cfg(target_os = "macos")'.build-dependencies]
+cc = "1.0"
