@@ -20,6 +20,10 @@ fn get_self_dir() -> PathBuf {
   Path::new(&s).parent().unwrap().to_owned()
 }
 
+#[cfg(debug_assertions)]
+pub fn setup_env() {}
+
+#[cfg(not(debug_assertions))]
 pub fn setup_env() {
   use std::env;
   env::set_current_dir(get_self_dir()).unwrap();
