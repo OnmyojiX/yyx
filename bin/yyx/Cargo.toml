@@ -1,6 +1,6 @@
 [package]
 name = "yyx"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Flux Xu <fluxxu@gmail.com>"]
 edition = "2018"
 description = "yyx"
@@ -16,6 +16,8 @@ description = "痒痒鼠的小伙伴。"
 yyx-data = { path = "../../yyx-data" }
 yyx-types = { path = "../../yyx-types" }
 yyx-resources = { path = "../../yyx-resources" }
+yyx-config = { path = "../../yyx-config" }
+yyx-platform = { path = "../../yyx-platform" }
 rocket = "0.4.0"
 rocket_contrib = "0.4.0"
 log = "0.4"
@@ -25,9 +27,6 @@ serde = { version = "1.0", features = ["rc"] }
 serde_derive = "1.0"
 serde_json = "1.0"
 reqwest = "0.9"
-
-[target.'cfg(windows)'.dependencies]
-winapi = { version = "0.3", features = ["shellapi"] }
 
 [build-dependencies]
 winres = "0.1.8"

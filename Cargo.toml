@@ -4,5 +4,7 @@ members = [
   "yyx-types",
   "yyx-resources",
   "yyx-data",
-  "yyx-utils"
+  "yyx-utils",
+  "yyx-config",
+  "yyx-platform"
 ]
