@@ -17,3 +17,7 @@ fn main() {
     .file("src/macos/proc.c")
     .compile("proc");
 }
+
+#[cfg(target_os = "linux")]
+fn main() {
+}

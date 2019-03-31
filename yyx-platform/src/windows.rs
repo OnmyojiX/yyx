@@ -1,6 +1,6 @@
 pub fn setup_env() {}
 
-fn launch_browser(url: &str) {
+pub fn launch_browser(url: &str) {
   use std::ffi::CString;
   use std::ptr;
   use winapi::um::shellapi::ShellExecuteA;
