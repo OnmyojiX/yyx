@@ -7,7 +7,7 @@ matrix:
       script: cargo build --all --release
       os: windows
       filter_secrets: false
-      before_deploy: zip -j -r target/yyx-$TRAVIS_TAG-Windows-32bit.zip target/release/yyx target/release/yyx.config.toml
+      before_deploy: zip -j -r target/yyx-$TRAVIS_TAG-Windows-32bit.zip target/release/yyx yyx.config.toml
       deploy:
         provider: releases
         skip_cleanup: true
@@ -22,7 +22,7 @@ matrix:
       script: cargo build --all --release
       os: windows
       filter_secrets: false
-      before_deploy: zip -j -r target/yyx-$TRAVIS_TAG-Windows-64bit.zip target/release/yyx target/release/yyx.config.toml
+      before_deploy: zip -j -r target/yyx-$TRAVIS_TAG-Windows-64bit.zip target/release/yyx yyx.config.toml
       deploy:
         provider: releases
         skip_cleanup: true
@@ -36,7 +36,7 @@ matrix:
       rust: nightly
       script: cargo build --all --release
       os: osx
-      before_deploy: zip -j -r target/yyx-$TRAVIS_TAG-macOS.zip target/release/yyx target/release/yyx.config.toml
+      before_deploy: cp yyx.config.toml target/release && zip -j -r target/yyx-$TRAVIS_TAG-macOS.zip target/release/yyx target/release/yyx.config.toml
       deploy:
         provider: releases
         skip_cleanup: true
@@ -50,7 +50,7 @@ matrix:
       rust: nightly
       script: cargo build --all --release
       os: linux
-      before_deploy: tar czvf target/yyx-"$TRAVIS_TAG"-macOS.tar.gz -C target/release yyx yyx.config.toml
+      before_deploy: cp yyx.config.toml target/release && tar czvf target/yyx-"$TRAVIS_TAG"-Linux.tar.gz -C target/release yyx yyx.config.toml
       deploy:
         provider: releases
         skip_cleanup: true
