@@ -7,7 +7,7 @@ matrix:
       script: cargo build --all --release
       os: windows
       filter_secrets: false
-      before_deploy: 7z -a target/yyx-$TRAVIS_TAG-Windows-32bit.zip target/release/yyx.exe yyx.config.toml
+      before_deploy: 7z a target/yyx-$TRAVIS_TAG-Windows-32bit.zip target/release/yyx.exe yyx.config.toml
       deploy:
         provider: releases
         skip_cleanup: true
@@ -22,7 +22,7 @@ matrix:
       script: cargo build --all --release
       os: windows
       filter_secrets: false
-      before_deploy: 7z -a target/yyx-$TRAVIS_TAG-Windows-64bit.zip target/release/yyx.exe yyx.config.toml
+      before_deploy: 7z a target/yyx-$TRAVIS_TAG-Windows-64bit.zip target/release/yyx.exe yyx.config.toml
       deploy:
         provider: releases
         skip_cleanup: true
@@ -56,7 +56,7 @@ matrix:
         skip_cleanup: true
         api_key:
           secure: KKJgygGEIPuSlGiR3mjqbCxsSFSrLiX972Lqcw9s5So6LH91s28TQCaIKRcaTjw+meotzrds/zJ/hy3TkT2IXGmQOqdOdAFhjGF6FZlrSIMB/TPCCvAp4yFjmoOIhkp4XwWfZUdsRXc3etK6KCE3ZX0RBxmLbzmNwnmPKeLnFB1W2ikkA52p5AKtFb5kxQzatbUbNwQEo/J2c60TIiakTGSJyA7gG5J/ZgN3pf4NsNKP7RXlF+HpwHIY3uIH3DJF/eCRawIkyn0f7HbmXD7dY3FsYaspXQqowFjNWpVzHEm84VOxZfZGgjqa8WaBi59MqjPDMQrqe4ABDZn4FZ5ClaOKhnUETlGD7miWjZiSoYXB902GQ/JVu121cTgPZG/WShs84uyR2fv1fdEqd9f3iRVdi2Zpz57tu48tWqS98qIbMGyiID3q+6PkR1r5AxRDVnaB9SWnNd1HaE1Gk/NMnTGWA0gsjSPgX51yt2BO5/hTWK2TezYWByD2IU8LlluJb9EykAmzc/JN0MBbveJTB3gXCdneY6U3WHegVjcO6LUgzIMH5lkN+kS0pFZbp4VzgsZA54n3Ip9b03QjYEcpPreitCN5RWKp1/GYFB5UT6AmiFjSo7anoHI9DM6mbeTKwkAGYlmicrEPCbJorU4X/Q0nH99+C++3VZESRWong2Y=
-        file: target/yyx-$TRAVIS_TAG-Linux.zip
+        file: target/yyx-$TRAVIS_TAG-Linux.tar.gz
         on:
           repo: OnmyojiX/yyx
           tags: true
