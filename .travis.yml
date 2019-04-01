@@ -50,7 +50,7 @@ matrix:
       rust: nightly
       script: cargo build --all --release
       os: linux
-      before_deploy: cp yyx.config.toml target/release && tar czvf target/yyx-"$TRAVIS_TAG"-Linux.tar.gz -C target/release yyx yyx.config.toml
+      before_deploy: cp yyx.config.toml target/release && tar czvf target/yyx-$TRAVIS_TAG-Linux.tar.gz -C target/release yyx yyx.config.toml
       deploy:
         provider: releases
         skip_cleanup: true
