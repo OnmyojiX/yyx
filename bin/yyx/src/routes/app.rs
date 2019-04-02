@@ -30,13 +30,14 @@ fn translate_path(path: &Path) -> String {
   path.replace("\\", "/").to_string()
 }
 
-#[get("/static/<file..>")]
+#[get("/<file..>", rank = 1)]
 pub fn static_file<'a>(file: PathBuf) -> Response<'a> {
   if file.extension().is_none() {
     return index();
   }
 
   let path = translate_path(&file);
+
   let resolve = YyxAsset::get(&path).map(|data| {
     (
       file
