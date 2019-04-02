@@ -30,7 +30,7 @@ fn translate_path(path: &Path) -> String {
   path.replace("\\", "/").to_string()
 }
 
-#[get("/<file..>")]
+#[get("/static/<file..>")]
 pub fn static_file<'a>(file: PathBuf) -> Response<'a> {
   if file.extension().is_none() {
     return index();

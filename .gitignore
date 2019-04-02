@@ -1,5 +1,6 @@
 target
-data
+/data
+/exports
 *.log
 .DS_Store
 dist

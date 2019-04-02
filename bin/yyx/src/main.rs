@@ -42,7 +42,14 @@ fn main() {
     .unwrap();
   rocket::custom(config)
     .manage(helpers::SelectedSnapshot::load())
-    .mount("/", routes![routes::app::static_file, routes::app::index])
+    .mount(
+      "/",
+      routes![
+        routes::app::static_file,
+        routes::app::index,
+        routes::export::files
+      ],
+    )
     .mount(
       "/api",
       routes![
@@ -51,6 +58,7 @@ fn main() {
         routes::snapshot::get,
         routes::equip::list,
         routes::hero::list,
+        routes::export::export_json
       ],
     )
     .launch();

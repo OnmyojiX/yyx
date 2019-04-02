@@ -53,9 +53,26 @@ pub fn load_last_snapshot() -> DataResult<Option<Snapshot>> {
     })
 }
 
+pub fn save_exported_file<T: AsRef<[u8]>>(name: &str, data: T) -> DataResult<String> {
+  let name = sanitize_name(name);
+  fs::write(Path::new("exports").join(&name), data)?;
+  Ok(name)
+}
+
+fn sanitize_name(name: &str) -> String {
+  name
+    .chars()
+    .filter(|c| c.is_alphanumeric() || "._-".contains(*c))
+    .collect()
+}
+
 fn ensure_data_dir() -> DataResult<()> {
   fs::create_dir_all("data").map_err(|err| {
     error!("Create data dir error: {}", err);
+    err
+  })?;
+  fs::create_dir_all("exports").map_err(|err| {
+    error!("Create exports dir error: {}", err);
     err
   })?;
   Ok(())

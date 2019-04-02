@@ -1,6 +1,8 @@
+mod attachment;
 mod json_string;
 mod snapshot;
 
+pub use self::attachment::Attachment;
 pub use self::json_string::JsonString;
 pub use rocket::State;
 pub use rocket_contrib::json::{Json, JsonError};
