@@ -65,7 +65,6 @@ fn main() {
 }
 
 fn ping_and_launch_browser(config: &YyxConfig) {
-  use reqwest;
   use std::thread;
   use std::time::Duration;
   let url = format!("http://{}:{}", config.host, config.port);
