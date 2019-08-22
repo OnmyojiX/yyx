@@ -1,0 +1,11 @@
+[package]
+name = "yyx-equip"
+version = "0.1.0"
+authors = ["Flux Xu <fluxxu@gmail.com>"]
+edition = "2018"
+
+# [[bin]]
+# name = "test"
+# path = "bin/hello.rs"
+
+[dependencies]
