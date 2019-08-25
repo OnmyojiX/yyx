@@ -26,6 +26,10 @@ pub fn init() -> DataResult<()> {
 
 const LAST_SNAPSHOT_FILE_NAME: &str = "last_snapshot.json";
 
+pub fn get_last_snapshot_path() -> DataResult<PathBuf> {
+  get_data_path(LAST_SNAPSHOT_FILE_NAME)
+}
+
 pub fn save_last_snapshot(snapshot: &Snapshot) -> DataResult<()> {
   use std::io::BufWriter;
   let file = fs::File::create(get_data_path(LAST_SNAPSHOT_FILE_NAME)?)?;

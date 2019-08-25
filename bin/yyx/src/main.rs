@@ -17,6 +17,7 @@ mod helpers;
 mod logger;
 mod result;
 mod routes;
+mod version;
 
 #[get("/ping")]
 fn ping() -> &'static str {
@@ -56,6 +57,8 @@ fn main() {
         ping,
         routes::snapshot::set,
         routes::snapshot::get,
+        routes::snapshot::pull_cbg,
+        routes::snapshot::export,
         routes::equip::list,
         routes::hero::list,
         routes::export::export_json

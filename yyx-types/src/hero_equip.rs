@@ -1,7 +1,7 @@
 use serde_derive::{Deserialize, Serialize};
 
 /// 御魂属性类型
-#[derive(Debug, Serialize, Deserialize, Clone, Copy)]
+#[derive(Debug, Serialize, Deserialize, Clone, Copy, PartialEq)]
 pub enum HeroEquipAttrType {
   /// 生命
   Hp,
@@ -61,7 +61,7 @@ pub struct HeroEquip {
 }
 
 /// 御魂属性
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct HeroEquipAttr {
   /// 属性类型
   #[serde(rename = "type")]

@@ -6,5 +6,6 @@ members = [
   "yyx-data",
   "yyx-utils",
   "yyx-config",
-  "yyx-platform"
+  "yyx-platform",
+  "yyx-cbg",
 ]
