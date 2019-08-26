@@ -1,6 +1,6 @@
 [package]
 name = "yyx"
-version = "0.9.0"
+version = "0.9.2"
 authors = ["Flux Xu <fluxxu@gmail.com>"]
 edition = "2018"
 description = "yyx"
@@ -9,7 +9,7 @@ description = "yyx"
 name = "痒痒熊"
 identifier = "com.f.yyx"
 icon = ["512x512.png"]
-version = "0.9.0"
+version = "0.9.2"
 description = "痒痒鼠的小伙伴。"
 
 [dependencies]

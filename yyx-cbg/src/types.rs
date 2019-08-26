@@ -56,7 +56,9 @@ pub struct CbgEquip {
   pub pos: i64,
   #[serde(rename = "qua")]
   pub quality: i64,
+  #[serde(default)]
   pub lock: bool,
+  #[serde(default)]
   #[serde(rename = "isuseless")]
   pub garbage: bool,
   pub rattr: Vec<(CbgAttrType, f64)>,
@@ -81,6 +83,7 @@ pub struct CbgHero {
   pub hero_id: i64,
   pub star: i64,
   pub level: i64,
+  #[serde(default)]
   pub lock: bool,
   pub nick: Option<String>,
   pub rarity: CbgHeroRarity,
@@ -90,6 +93,7 @@ pub struct CbgHero {
   pub equips: Vec<String>,
   #[serde(rename = "selectSkills")]
   pub skills: Vec<i64>,
+  #[serde(default)]
   pub exp: f64,
   pub attrs: HashMap<CbgAttrType, CbgHeroAttr>,
 }
