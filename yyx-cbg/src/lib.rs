@@ -9,5 +9,5 @@ mod types;
 
 pub mod result;
 
-pub use self::pull::{CbgListingInfo, CbgSnapshot};
+pub use self::pull::{get_params_from_url, CbgListingInfo, CbgSnapshot};
 pub use self::types::*;
