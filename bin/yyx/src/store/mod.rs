@@ -1,3 +1,4 @@
+use serde_derive::Serialize;
 use std::collections::HashMap;
 use std::sync::{Arc, RwLock};
 
@@ -17,18 +18,68 @@ impl YyxStore {
     })
   }
 
+  pub fn get_active_states(&self) -> Vec<AccountStateInfo> {
+    let lock = self.accounts.read().unwrap();
+    lock
+      .values()
+      .map(|s| {
+        let lock = s.read().unwrap();
+        AccountStateInfo {
+          id: lock.id.clone(),
+          busy: false,
+        }
+      })
+      .collect()
+  }
+
   pub fn get_account(&self, id: &AccountId) -> Option<AccountStateRef> {
     self.accounts.read().unwrap().get(id).cloned()
   }
 
-  pub fn set_account(&self, id: AccountId, snapshot: Snapshot) {
+  pub fn open_account(&self, id: AccountId, snapshot: Snapshot) {
     let mut lock = self.accounts.write().unwrap();
-    lock.insert(id, Arc::new(RwLock::new(AccountState { snapshot })));
+    lock.insert(
+      id.clone(),
+      Arc::new(RwLock::new(AccountState { id, snapshot })),
+    );
+  }
+
+  pub fn close_account(&self, id: &AccountId, _force: bool) -> bool {
+    let mut lock = self.accounts.write().unwrap();
+    lock.remove(id);
+    true
   }
 }
 
 pub struct AccountState {
+  pub id: AccountId,
   pub snapshot: Snapshot,
 }
 
+#[derive(Debug, Serialize)]
+pub struct AccountStateInfo {
+  pub id: AccountId,
+  pub busy: bool,
+}
+
 pub type AccountStateRef = Arc<RwLock<AccountState>>;
+
+pub trait AccountStateExt {
+  fn with<F, R>(&self, f: F) -> R
+  where
+    F: FnOnce(&AccountState) -> R;
+
+  fn get_id(&self) -> AccountId {
+    self.with(|state| state.id.clone())
+  }
+}
+
+impl AccountStateExt for AccountStateRef {
+  fn with<F, R>(&self, f: F) -> R
+  where
+    F: FnOnce(&AccountState) -> R,
+  {
+    let lock = self.read().unwrap();
+    f(&lock)
+  }
+}

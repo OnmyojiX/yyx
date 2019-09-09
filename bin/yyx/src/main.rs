@@ -5,6 +5,7 @@ use futures01::sync::oneshot;
 use warp::{path, Filter};
 
 use yyx_config::YyxConfig;
+use yyx_data::DbRef;
 
 mod helpers;
 mod logger;
@@ -20,6 +21,7 @@ fn main() {
   yyx_data::init().expect("初始化数据文件夹失败");
 
   let config = yyx_config::read_or_create_default();
+  let db = DbRef::new().expect("初始化数据库失败");
 
   ping_and_launch_browser(&config);
 
@@ -32,17 +34,20 @@ fn main() {
   let routes = path("api")
     .and(
       ping
+        .or(routes::account::get(db.clone()))
+        .or(routes::account::list(db.clone()))
+        .or(routes::account::list_active(store.clone()))
+        .or(routes::account::close(store.clone()))
+        .or(routes::account::delete(db.clone()))
         .or(routes::snapshot::get(store.clone()))
-        .or(routes::snapshot::set(store.clone()))
+        .or(routes::snapshot::import(store.clone(), db.clone()))
         .or(routes::snapshot::export(store.clone()))
         .or(routes::snapshot::pull_cbg(store.clone()))
+        .or(routes::export::export_json())
+        .map(|reply| warp::reply::with_header(reply, "Cache-Control", "no-cache"))
         .recover(result::handle_rejection),
     )
-    .or(
-      routes::app::static_files()
-        .or(routes::export::export_json())
-        .or(routes::export::files()),
-    )
+    .or(routes::app::static_files().or(routes::export::files()))
     .or_else(|_| Err(warp::reject::not_found()))
     .with(warp::log("yyx"));
 

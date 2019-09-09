@@ -1,6 +1,3 @@
-use chrono;
-use fern;
-
 pub fn setup_logger() -> Result<(), fern::InitError> {
   #[cfg(debug_assertions)]
   {
