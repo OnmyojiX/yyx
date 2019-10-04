@@ -17,6 +17,7 @@ pub struct Player {
 /// 玩家资源
 ///
 #[derive(Debug, Serialize, Deserialize, Clone, Default)]
+#[serde(default)]
 pub struct PlayerCurrency {
   /// 金币
   pub coin: i64,
@@ -25,27 +26,39 @@ pub struct PlayerCurrency {
   /// 体力
   pub action_point: i64,
   /// 樱饼
-  #[serde(default)]
   pub auto_point: i64,
   /// 荣誉
-  #[serde(default)]
   pub honor: i64,
   /// 勋章
-  #[serde(default)]
   pub medal: i64,
   /// 功勋
-  #[serde(default)]
   pub contrib: i64,
   /// 御灵境之钥
-  #[serde(default)]
   pub totem_pass: i64,
   /// 魂玉
-  #[serde(default)]
   pub s_jade: i64,
   /// 皮肤券
-  #[serde(default)]
   pub skin_token: i64,
   /// 突破券
-  #[serde(default)]
   pub realm_raid_pass: i64,
+  /// 破碎的符咒
+  pub broken_amulet: i64,
+  /// 神秘的符咒
+  pub mystery_amulet: i64,
+  /// 现世符咒
+  pub ar_amulet: i64,
+  /// 御札
+  pub ofuda: i64,
+  /// 金御札
+  pub gold_ofuda: i64,
+  /// 八岐大蛇鳞片
+  pub scale: i64,
+  /// 大蛇的逆鳞
+  pub reverse_scale: i64,
+  /// 逢魔之魂
+  pub demon_soul: i64,
+  /// 痴念之卷
+  pub foolery_pass: i64,
+  /// SP皮肤券
+  pub sp_skin_token: i64,
 }

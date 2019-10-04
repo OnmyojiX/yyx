@@ -143,7 +143,7 @@ impl TryFrom<CbgEquipDesc> for SnapshotData {
       coin: value.coin,
       jade: value.jade,
       action_point: value.action_point,
-      auto_point: value.action_point,
+      auto_point: value.auto_point,
       honor: value.honor,
       medal: value.medal,
       totem_pass: value.totem_pass,
