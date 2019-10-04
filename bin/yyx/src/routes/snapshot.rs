@@ -115,7 +115,6 @@ pub fn import(
           .map_err(|err| {
             YyxError::internal(format!("导入快照记录失败: {}", err)).into_rejection()
           })?;
-        ;
         store.open_account(id.clone(), snapshot);
         Ok(warp::reply::json(&p))
       })
