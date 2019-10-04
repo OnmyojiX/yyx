@@ -2,6 +2,8 @@ use diesel::connection::Connection;
 use diesel::sqlite::SqliteConnection;
 use std::sync::{Arc, Mutex};
 
+embed_migrations!("../migrations");
+
 use crate::result::*;
 
 pub mod player;
@@ -17,6 +19,12 @@ impl DbRef {
     let conn =
       SqliteConnection::establish(&path.to_string_lossy()).map_err(DataError::DbConnection)?;
     Ok(DbRef(Arc::new(Mutex::new(conn))))
+  }
+
+  pub fn migrate(&self) -> DataResult<()> {
+    self.exec(|conn| -> DataResult<_> {
+      embedded_migrations::run(conn).map_err(Into::into)
+    })
   }
 
   pub fn exec<F, T, E>(&self, f: F) -> Result<T, E>

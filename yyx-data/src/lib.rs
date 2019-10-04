@@ -10,6 +10,8 @@ extern crate diesel;
 extern crate failure_derive;
 #[macro_use]
 extern crate yyx_utils;
+#[macro_use]
+extern crate diesel_migrations;
 
 use std::fs;
 use std::path::{Path, PathBuf};

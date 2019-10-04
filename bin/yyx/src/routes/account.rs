@@ -24,10 +24,6 @@ pub fn account_id() -> impl Filter<Extract = (AccountId,), Error = Rejection> + 
       }),
     )
     .unify()
-    .or(
-      warp::any().and_then(|| Err::<_, Rejection>(YyxError::bad_request("无法识别账号ID").into())),
-    )
-    .unify()
 }
 
 // pub fn account_state(
@@ -42,8 +38,7 @@ pub fn account_id() -> impl Filter<Extract = (AccountId,), Error = Rejection> + 
 
 pub fn get(db: DbRef) -> impl Filter<Extract = (impl Reply,), Error = Rejection> + Clone {
   warp::get2()
-    .and(path("account"))
-    .and(account_id())
+    .and(path("account").and(account_id()))
     .and_then(move |id| {
       let db = db.clone();
       block(move || {

@@ -17,13 +17,17 @@ pub enum DataError {
 
   #[fail(display = "db connection error: {}", _0)]
   DbConnection(diesel::result::ConnectionError),
+
+  #[fail(display = "db migration error: {}", _0)]
+  DbMigration(diesel_migrations::RunMigrationsError),
 }
 
 impl_err_from! {
   DataError [
     (std::io::Error => |e| DataError::Io(e)),
     (serde_json::Error => |e| DataError::Json(e)),
-    (diesel::result::Error => |e| DataError::Db(e))
+    (diesel::result::Error => |e| DataError::Db(e)),
+    (diesel_migrations::RunMigrationsError => |e| DataError::DbMigration(e))
   ]
 }
 

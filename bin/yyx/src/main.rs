@@ -22,6 +22,7 @@ fn main() {
 
   let config = yyx_config::read_or_create_default();
   let db = DbRef::new().expect("初始化数据库失败");
+  db.migrate().expect("升级数据库失败");
 
   ping_and_launch_browser(&config);
 
