@@ -1,6 +1,9 @@
 CREATE TABLE player (
-  id INTEGER PRIMARY KEY NOT NULL,
+  id INTEGER PRIMARY KEY,
+  server_id INTEGER NOT NULL,
   short_id INTEGER NOT NULL,
+  cbg_server_id TEXT,
+  cbg_order_sn TEXT,
   name TEXT NOT NULL,
   level INTEGER NOT NULL,
   latest_snapshot_date TIMESTAMP NOT NULL,
@@ -8,7 +11,7 @@ CREATE TABLE player (
 );
 
 CREATE TABLE equip_group (
-  id INTEGER PRIMARY KEY NOT NULL,
+  id INTEGER PRIMARY KEY,
   player_id INTEGER NOT NULL,
   name TEXT NOT NULL,
   equip_ids TEXT NOT NULL,
@@ -17,7 +20,7 @@ CREATE TABLE equip_group (
 );
 
 CREATE TABLE equip_ref (
-  id INTEGER PRIMARY KEY NOT NULL,
+  id INTEGER PRIMARY KEY,
   player_id INTEGER NOT NULL,
   yys_id TEXT NOT NULL,
   suit_id INTEGER NOT NULL,
@@ -27,7 +30,7 @@ CREATE TABLE equip_ref (
 );
 
 CREATE TABLE hero_ref (
-  id INTEGER PRIMARY KEY NOT NULL,
+  id INTEGER PRIMARY KEY,
   player_id INTEGER NOT NULL,
   yys_id TEXT NOT NULL,
   hero_id INTEGER NOT NULL,
@@ -37,7 +40,7 @@ CREATE TABLE hero_ref (
 );
 
 CREATE TABLE equip_preset_ref (
-  id INTEGER PRIMARY KEY NOT NULL,
+  id INTEGER PRIMARY KEY,
   player_id INTEGER NOT NULL,
   name TEXT NOT NULL,
   equip_ids TEXT NOT NULL,
@@ -46,7 +49,7 @@ CREATE TABLE equip_preset_ref (
 );
 
 CREATE TABLE tag (
-  id INTEGER PRIMARY KEY NOT NULL,
+  id INTEGER PRIMARY KEY,
   player_id INTEGER NOT NULL,
   name TEXT NOT NULL,
   exclude_from_equip_calc BOOLEAN DEFAULT FALSE NOT NULL,
@@ -55,7 +58,7 @@ CREATE TABLE tag (
 );
 
 CREATE TABLE tag_object (
-  id INTEGER PRIMARY KEY NOT NULL,
+  id INTEGER PRIMARY KEY,
   tag_id INTEGER NOT NULL,
   object_type INTEGER NOT NULL,
   object_id INTEGER NOT NULL,

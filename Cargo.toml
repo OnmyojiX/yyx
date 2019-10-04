@@ -8,4 +8,5 @@ members = [
   "yyx-config",
   "yyx-platform",
   "yyx-cbg",
+  "yyx-equip",
 ]

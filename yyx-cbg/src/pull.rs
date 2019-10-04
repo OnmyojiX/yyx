@@ -97,12 +97,12 @@ pub struct CbgListingInfo {
 #[derive(Debug, Serialize)]
 pub struct Params {
   #[serde(rename = "serverid")]
-  server_id: String,
+  pub server_id: String,
   #[serde(rename = "ordersn")]
-  order_sn: String,
+  pub order_sn: String,
 }
 
-fn get_params_from_url(cbg_url: &str) -> Result<Params, CbgError> {
+pub fn get_params_from_url(cbg_url: &str) -> Result<Params, CbgError> {
   lazy_static! {
     static ref URL: Url = { Url::parse(URL_PREFIX).unwrap() };
   }

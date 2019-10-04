@@ -1,70 +1,63 @@
 #![warn(clippy::all)]
-#![feature(proc_macro_hygiene, decl_macro)]
 
-#[macro_use]
-extern crate log;
-#[macro_use]
-extern crate rocket;
-#[macro_use]
-extern crate rocket_contrib;
+use futures01::sync::oneshot;
 
-use rocket::config::{Config, Environment, Limits};
-use std::env;
+use warp::{path, Filter};
 
 use yyx_config::YyxConfig;
+use yyx_data::DbRef;
 
 mod helpers;
 mod logger;
 mod result;
 mod routes;
+mod store;
 mod version;
 
-#[get("/ping")]
-fn ping() -> &'static str {
-  "OK"
-}
+use self::store::YyxStore;
 
 fn main() {
-  yyx_platform::setup_env();
-  env::set_var("ROCKET_CLI_COLORS", "off");
-
-  logger::setup_logger().unwrap();
-  yyx_data::init().unwrap();
+  logger::setup_logger().expect("初始化日志系统失败");
+  yyx_data::init().expect("初始化数据文件夹失败");
 
   let config = yyx_config::read_or_create_default();
+  let db = DbRef::new().expect("初始化数据库失败");
 
   ping_and_launch_browser(&config);
 
-  let config = Config::build(Environment::Production)
-    .address(&config.host as &str)
-    .port(config.port)
-    .secret_key("8Xui8SN4mI+7egV/9dlfYYLGQJeEx4+DwmSQLwDVXJg=")
-    .limits(Limits::new().limit("json", 100 * 1024 * 1024))
-    .unwrap();
-  rocket::custom(config)
-    .manage(helpers::SelectedSnapshot::load())
-    .mount(
-      "/",
-      routes![
-        routes::app::static_file,
-        routes::app::index,
-        routes::export::files
-      ],
+  let ping = path!("ping")
+    .and(warp::path::end())
+    .map(|| version::VERSION);
+
+  let store = YyxStore::new_ref();
+
+  let routes = path("api")
+    .and(
+      ping
+        .or(routes::account::get(db.clone()))
+        .or(routes::account::list(db.clone()))
+        .or(routes::account::list_active(store.clone()))
+        .or(routes::account::close(store.clone()))
+        .or(routes::account::delete(db.clone()))
+        .or(routes::snapshot::get(store.clone()))
+        .or(routes::snapshot::import(store.clone(), db.clone()))
+        .or(routes::snapshot::export(store.clone()))
+        .or(routes::snapshot::pull_cbg(store.clone()))
+        .or(routes::export::export_json())
+        .map(|reply| warp::reply::with_header(reply, "Cache-Control", "no-cache"))
+        .recover(result::handle_rejection),
     )
-    .mount(
-      "/api",
-      routes![
-        ping,
-        routes::snapshot::set,
-        routes::snapshot::get,
-        routes::snapshot::pull_cbg,
-        routes::snapshot::export,
-        routes::equip::list,
-        routes::hero::list,
-        routes::export::export_json
-      ],
-    )
-    .launch();
+    .or(routes::app::static_files().or(routes::export::files()))
+    .or_else(|_| Err(warp::reject::not_found()))
+    .with(warp::log("yyx"));
+
+  let addr = format!("{}:{}", config.host, config.port)
+    .parse::<std::net::SocketAddr>()
+    .expect(&format!("无效的地址: {}:{}", config.host, config.port));
+
+  let (_shutdown, rx) = oneshot::channel();
+  let (_addr, server) = warp::serve(routes).bind_with_graceful_shutdown(addr, rx);
+  tokio::run(server);
 }
 
 fn ping_and_launch_browser(config: &YyxConfig) {
