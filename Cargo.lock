@@ -1966,7 +1966,7 @@ dependencies = [
 
 [[package]]
 name = "yyx"
-version = "0.91.0"
+version = "0.99.1"
 dependencies = [
  "cc 1.0.45 (registry+https://github.com/rust-lang/crates.io-index)",
  "chrono 0.4.9 (registry+https://github.com/rust-lang/crates.io-index)",
