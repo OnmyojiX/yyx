@@ -95,7 +95,7 @@ pub fn import(
 ) -> impl Filter<Extract = (impl Reply,), Error = Rejection> + Clone {
   warp::post2()
     .and(path("import"))
-    .and(warp::filters::body::content_length_limit(20 * 1024 * 1024))
+    .and(warp::filters::body::content_length_limit(50 * 1024 * 1024))
     .and(warp::body::json())
     .and_then(move |snapshot: Snapshot| {
       let store = store.clone();
