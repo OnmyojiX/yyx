@@ -1,6 +1,6 @@
 [package]
 name = "yyx"
-version = "0.99.2"
+version = "0.99.3"
 authors = ["Flux Xu <fluxxu@gmail.com>"]
 edition = "2018"
 description = "yyx"
