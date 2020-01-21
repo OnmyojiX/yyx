@@ -3,7 +3,7 @@ cache: cargo
 matrix:
   include:
     - name: Windows 32bit
-      rust: nightly-i686-pc-windows-msvc
+      rust: nightly-2019-12-24-i686-pc-windows-msvc
       script: cargo build --all --release
       os: windows
       filter_secrets: false
@@ -18,7 +18,7 @@ matrix:
           repo: OnmyojiX/yyx
           tags: true
     - name: Windows 64bit
-      rust: nightly
+      rust: nightly-2019-12-24
       script: cargo build --all --release
       os: windows
       filter_secrets: false
@@ -33,7 +33,7 @@ matrix:
           repo: OnmyojiX/yyx
           tags: true
     - name: macOS
-      rust: nightly
+      rust: nightly-2019-12-24
       script: cargo build --all --release
       os: osx
       before_deploy: cp yyx.config.toml target/release && zip -j -r target/yyx-$TRAVIS_TAG-macOS.zip target/release/yyx target/release/yyx.config.toml
@@ -47,7 +47,7 @@ matrix:
           repo: OnmyojiX/yyx
           tags: true
     - name: "Linux"
-      rust: nightly
+      rust: nightly-2019-12-24
       script: cargo build --all --release
       os: linux
       before_deploy: cp yyx.config.toml target/release && tar czvf target/yyx-$TRAVIS_TAG-Linux.tar.gz -C target/release yyx yyx.config.toml
