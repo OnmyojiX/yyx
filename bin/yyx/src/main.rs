@@ -22,8 +22,9 @@ fn main() {
       "痒痒熊启动失败: {}",
       panic_info
         .payload()
-        .downcast_ref::<&str>()
-        .unwrap_or(&"未知原因")
+        .downcast_ref::<String>()
+        .map(AsRef::as_ref)
+        .unwrap_or("未知原因")
     )
   }));
   let res = std::panic::catch_unwind(|| start());
@@ -41,8 +42,6 @@ fn start() {
   let config = yyx_config::read_or_create_default();
   let db = DbRef::new().expect("初始化数据库失败");
   db.migrate().expect("升级数据库失败");
-
-  ping_and_launch_browser(&config);
 
   let ping = path!("ping")
     .and(warp::path::end())
@@ -76,6 +75,9 @@ fn start() {
 
   let (_shutdown, rx) = oneshot::channel();
   let (_addr, server) = warp::serve(routes).bind_with_graceful_shutdown(addr, rx);
+
+  ping_and_launch_browser(&config);
+
   tokio::run(server);
 }
 
