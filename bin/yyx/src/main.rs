@@ -17,6 +17,24 @@ mod version;
 use self::store::YyxStore;
 
 fn main() {
+  std::panic::set_hook(Box::new(|panic_info| {
+    eprintln!(
+      "痒痒熊启动失败: {}",
+      panic_info
+        .payload()
+        .downcast_ref::<&str>()
+        .unwrap_or(&"未知原因")
+    )
+  }));
+  let res = std::panic::catch_unwind(|| start());
+
+  if let Err(_) = res {
+    use std::io::Read;
+    std::io::stdin().bytes().next();
+  }
+}
+
+fn start() {
   logger::setup_logger().expect("初始化日志系统失败");
   yyx_data::init().expect("初始化数据文件夹失败");
 
@@ -35,16 +53,16 @@ fn main() {
   let routes = path("api")
     .and(
       ping
-        .or(routes::account::get(db.clone()))
-        .or(routes::account::list(db.clone()))
-        .or(routes::account::list_active(store.clone()))
-        .or(routes::account::close(store.clone()))
-        .or(routes::account::delete(db.clone()))
-        .or(routes::snapshot::get(store.clone()))
-        .or(routes::snapshot::import(store.clone(), db.clone()))
-        .or(routes::snapshot::export(store.clone()))
-        .or(routes::snapshot::pull_cbg(store.clone()))
-        .or(routes::export::export_json())
+        .or(routes::account::get(db.clone()).boxed())
+        .or(routes::account::list(db.clone()).boxed())
+        .or(routes::account::list_active(store.clone()).boxed())
+        .or(routes::account::close(store.clone()).boxed())
+        .or(routes::account::delete(db.clone()).boxed())
+        .or(routes::snapshot::get(store.clone()).boxed())
+        .or(routes::snapshot::import(store.clone(), db.clone()).boxed())
+        .or(routes::snapshot::export(store.clone()).boxed())
+        .or(routes::snapshot::pull_cbg(store.clone()).boxed())
+        .or(routes::export::export_json().boxed())
         .map(|reply| warp::reply::with_header(reply, "Cache-Control", "no-cache"))
         .recover(result::handle_rejection),
     )
