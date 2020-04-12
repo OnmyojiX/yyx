@@ -81,11 +81,11 @@ joinable!(tag -> player (player_id));
 joinable!(tag_object -> tag (tag_id));
 
 allow_tables_to_appear_in_same_query!(
-    equip_group,
-    equip_preset_ref,
-    equip_ref,
-    hero_ref,
-    player,
-    tag,
-    tag_object,
+  equip_group,
+  equip_preset_ref,
+  equip_ref,
+  hero_ref,
+  player,
+  tag,
+  tag_object,
 );

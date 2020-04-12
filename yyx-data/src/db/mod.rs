@@ -22,9 +22,7 @@ impl DbRef {
   }
 
   pub fn migrate(&self) -> DataResult<()> {
-    self.exec(|conn| -> DataResult<_> {
-      embedded_migrations::run(conn).map_err(Into::into)
-    })
+    self.exec(|conn| -> DataResult<_> { embedded_migrations::run(conn).map_err(Into::into) })
   }
 
   pub fn exec<F, T, E>(&self, f: F) -> Result<T, E>

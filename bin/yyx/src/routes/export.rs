@@ -1,14 +1,14 @@
 use crate::helpers::*;
 use crate::result::*;
+use serde_derive::Deserialize;
 use serde_json::{self, Value};
 use std::path::Path;
 use warp::{path, Filter, Rejection, Reply};
 use yyx_data::save_exported_file;
-use serde_derive::Deserialize;
 
 #[derive(Deserialize)]
 struct ExportJsonQuery {
-  filename: String
+  filename: String,
 }
 
 pub fn export_json() -> impl Filter<Extract = (impl Reply,), Error = Rejection> + Clone {
