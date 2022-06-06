@@ -7,6 +7,6 @@ edition = "2018"
 [dependencies]
 yyx-types = { path = "../yyx-types" }
 serde_json = "1.0"
-crossbeam-channel = "0.3.9"
+crossbeam-channel = "0.4.4"
 rand = "0.7.2"
 ordered-float = "1.0.2"
